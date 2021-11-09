@@ -1,0 +1,11 @@
+.product-form {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.input,
+.add-btn {
+    flex: 1 1 calc((100% / 3) - 20px);
+    padding: 8px;
+}

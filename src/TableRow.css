@@ -1,0 +1,13 @@
+.table-row td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.head-item {
+    width: 202px;
+}
+
+.edit-btn,
+.del-btn {
+    margin-right: 10px;
+}

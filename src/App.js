@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from "react";
+import Form from './Form';
+import Table from "./Table";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [products, setProducts] = useState([]);
+
+  function addProduct(prod) {
+		setProducts([...products, prod]);
+	}
+
+  function setEditState(editId) {
+    setProducts(products.map(product =>
+			product.id === editId ? {...product, isEdit: !product.isEdit} : product
+		));
+  }
+
+  function editProductValue(editId, prop, value) {
+    setProducts(products.map(product =>
+			product.id === editId ? {...product, [prop]: value} : product
+		));
+  }
+
+  return <div className="container">
+    <h1 className="title">Калькулятор продуктов</h1>
+    <Form addProduct={addProduct} />
+    <Table products={products} setEditState={setEditState} editProductValue={editProductValue}/>
+  </div>
 }
 
 export default App;
