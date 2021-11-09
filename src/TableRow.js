@@ -1,7 +1,7 @@
 import "./TableRow.css";
 import React from "react";
 
-function TableRow({ product, setEditState, editProductValue }) {
+function TableRow({ product, editProductValue, deleteProduct }) {
 
     return <tr className="table-row">
         <td className="head-item">
@@ -39,11 +39,16 @@ function TableRow({ product, setEditState, editProductValue }) {
         <td className="head-action">
             <button 
                 className="edit-btn"
-                onClick={() => setEditState(product.id)}
+                onClick={() => editProductValue(product.id, "isEdit", !product.isEdit)}
             >
                 {product.isEdit ? "сохранить" : "изменить"}
             </button>
-            <button className="del-btn">удалить</button>
+            <button
+                className="del-btn"
+                onClick={() => deleteProduct(product.id)}
+            >
+                удалить
+            </button>
         </td>
     </tr>;
 

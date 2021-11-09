@@ -2,7 +2,7 @@ import "./Table.css";
 import React from "react";
 import TableRow from "./TableRow";
 
-function Table({ products, setEditState, editProductValue }) {
+function Table({ products, editProductValue, deleteProduct }) {
 
     let content;
 
@@ -20,7 +20,12 @@ function Table({ products, setEditState, editProductValue }) {
 
             <tbody>
                 {
-                    products.map((product, index) => <TableRow key={index} product={product} setEditState={setEditState} editProductValue={editProductValue}/> )
+                    products.map((product, index) => <TableRow
+                                                        key={index}
+                                                        product={product}
+                                                        editProductValue={editProductValue}
+                                                        deleteProduct={deleteProduct}
+                                                    /> )
                 }
             </tbody>
         </table>
