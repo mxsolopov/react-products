@@ -6,8 +6,6 @@ import CategoriesList from "./CategoriesList";
 function Form({ addProduct }) {
 
     const [product, setProduct] = useState(getInitProduct);
-    const [categoriesEnabled, setCategoriesEnabled] = useState(false);
-
 
     function getInitProduct() {
         const now = new Date();
@@ -24,10 +22,6 @@ function Form({ addProduct }) {
 
     function changeProduct(prop, event) {
         setProduct({ ...product, [prop]: event.target.value });
-    }
-
-    function changeProductFromList(prop, value) {
-        setProduct({ ...product, [prop]: value });
     }
 
     function addZero(num) {
@@ -66,9 +60,9 @@ function Form({ addProduct }) {
                 placeholder="Категория"
                 value={product.category}
                 onChange={event => changeProduct("category", event)}
-                onFocus = {() => setCategoriesEnabled(true)}
+                list="list"
             />
-            <CategoriesList product={product} categoriesEnabled={categoriesEnabled} setCategoriesEnabled={setCategoriesEnabled} changeProductFromList={changeProductFromList}/>
+            <CategoriesList listId="list"/>
         </div>
 
         <div className="input-wrapper">
@@ -85,7 +79,6 @@ function Form({ addProduct }) {
             <button className="add-btn" onClick={() => {
                 addProduct(product);
                 setProduct(getInitProduct);
-                setCategoriesEnabled(false);
             }}>
                 Добавить
             </button>

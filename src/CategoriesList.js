@@ -1,40 +1,28 @@
-import "./CategoriesList.css";
+// import "./CategoriesList.css";
 import React from "react";
 
-function CategoriesList({ product, categoriesEnabled, setCategoriesEnabled, changeProductFromList }) {
+function CategoriesList({ listId }) {
 
     let categoriesList = "";
-    let listClass = "category-list";
 
-    if (categoriesEnabled) {
-        const categories = localStorage.getItem("categories");
-        if (categories !== null) {
-            listClass = "category-list show-borders";
-            const categoriesArr = JSON.parse(categories);
+    const categories = localStorage.getItem("categories");
 
-            const filteredCategories = categoriesArr.filter(category => {
-                return category.toLowerCase().includes(product.category.toLowerCase());
-              })
+    if (categories !== null) {
+        const categoriesArr = JSON.parse(categories);
 
-            categoriesList = filteredCategories.map((category, index) => {
-                return <li
-                            key={index}
-                            className="category-list-item"
-                            onClick={() => {
-                                changeProductFromList("category", category);
-                                setCategoriesEnabled(false);
-                            }}
-                        >
-                            {category}
-                        </li>
-            });
-        }
-
+        categoriesList = categoriesArr.map((category, index) => {
+            return <option
+                key={index}
+                value={category}
+            >
+                {category}
+            </option>
+        });
     }
 
-    return <ul className={listClass}>
+    return <datalist id={listId}>
         {categoriesList}
-    </ul>
+    </datalist>
 }
 
 export default CategoriesList;
