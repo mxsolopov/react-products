@@ -20,8 +20,17 @@ function App() {
       localStorage.setItem('categories', firstCategory);
     } else {
       const savedCategories = JSON.parse(categories);
-      savedCategories.push(cat);
-      localStorage.setItem('categories', JSON.stringify(savedCategories));
+      const checkExist = savedCategories.some(savedCategory => {
+        if (savedCategory.toLowerCase() === cat.toLowerCase()) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (!checkExist) {
+        savedCategories.push(cat);
+        localStorage.setItem('categories', JSON.stringify(savedCategories));
+      }
     }
   }
 
