@@ -44,6 +44,7 @@ function App() {
   function editProductValues(editId, date, name, category, cost) {
     setProducts(products.map(product => {
         if (product.id === editId) {
+          saveCategory(category);
           return { ...product, "date": date, "name": name, "category": category, "cost": cost, "isEdit": !product.isEdit }
         } else {
           return product;
