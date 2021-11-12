@@ -7,6 +7,18 @@ import CategoriesSelect from "./CategoriesSelect";
 
 function Table({ products, editProductValues, deleteProduct, startDate, setStartDate, endDate, setEndDate, category, setCategory }) {
 
+    function getSum() {
+        let sum = 0;
+        for (let product of products) {
+            if (Date.parse(product.date) >= Date.parse(startDate) &&
+                Date.parse(product.date) <= Date.parse(endDate) &&
+                (category === "Все" || category === product.category)) {
+                    sum = sum + +product.cost;
+            }
+        }
+        return sum;
+    }
+
     let content;
 
     if (products.length > 0) {
@@ -56,20 +68,28 @@ function Table({ products, editProductValues, deleteProduct, startDate, setStart
                         {
                             products.map((product, index) => {
 
-                                return <TableRow
-                                    key={index}
-                                    product={product}
-                                    editProductValues={editProductValues}
-                                    deleteProduct={deleteProduct}
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    category={category}
-                                />
+                                if (Date.parse(product.date) >= Date.parse(startDate) &&
+                                    Date.parse(product.date) <= Date.parse(endDate) &&
+                                    (category === "Все" || category === product.category)) {
 
+                                    return <TableRow
+                                        key={index}
+                                        product={product}
+                                        editProductValues={editProductValues}
+                                        deleteProduct={deleteProduct}
+                                    />
+                                } else {
+                                    return <></>;
+                                }
                             }
                             )
                         }
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan={3}></td>
+                            <td>Сумма: {getSum()}</td></tr>
+                    </tfoot>
                 </table>
             </div>
     } else {
