@@ -7,6 +7,13 @@ function App() {
 
   const [products, setProducts] = useState([]);
 
+  const now = new Date();
+
+  const [startDate, setStartDate] = useState(new Date(`${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`));
+  const [endDate, setEndDate] = useState(new Date(`${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`));
+
+  const [category, setCategory] = useState('Все');
+
   function addProduct(prod) {
     setProducts([...products, prod]);
     saveCategory(prod["category"]);
@@ -34,9 +41,14 @@ function App() {
     }
   }
 
-  function editProductValue(editId, prop, value) {
-    setProducts(products.map(product =>
-      product.id === editId ? { ...product, [prop]: value } : product
+  function editProductValues(editId, date, name, category, cost) {
+    setProducts(products.map(product => {
+        if (product.id === editId) {
+          return { ...product, "date": date, "name": name, "category": category, "cost": cost, "isEdit": !product.isEdit }
+        } else {
+          return product;
+        }
+      }
     ));
   }
 
@@ -55,7 +67,7 @@ function App() {
   return <div className="container">
     <h1 className="title">Калькулятор продуктов</h1>
     <Form addProduct={addProduct} />
-    <Table products={products} editProductValue={editProductValue} deleteProduct={deleteProduct} />
+    <Table products={products} editProductValues={editProductValues} deleteProduct={deleteProduct} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} category={category} setCategory={setCategory} />
   </div>
 }
 

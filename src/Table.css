@@ -1,6 +1,37 @@
+.table-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.date-picker {
+    display: flex;
+}
+
+.filter-title {
+    margin-right: 10px;
+}
+
+.date-input {
+    width: 75px;
+}
+
+.filters-wrapper {
+    display: flex;
+}
+
+.categories {
+    margin-right: 20px;
+}
+
+.divider {
+    margin: 0 4px;
+}
+
 .table {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -9,6 +40,7 @@
     border: 1px solid black;
     padding: 8px;
     font-weight: bold;
+    width: 202px;
 }
 
 .not-found-msg {
