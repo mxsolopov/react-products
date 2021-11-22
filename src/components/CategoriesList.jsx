@@ -1,4 +1,3 @@
-// import "./CategoriesList.css";
 import React from "react";
 
 function CategoriesList({ listId }) {

@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useState } from "react";
-import Form from './Form';
-import Table from "./Table";
+import Form from './components/Form';
+import Table from "./components/Table";
+import Chart from './components/Chart';
 
 function App() {
 
@@ -43,13 +44,13 @@ function App() {
 
   function editProductValues(editId, date, name, category, cost) {
     setProducts(products.map(product => {
-        if (product.id === editId) {
-          saveCategory(category);
-          return { ...product, "date": date, "name": name, "category": category, "cost": cost, "isEdit": !product.isEdit }
-        } else {
-          return product;
-        }
+      if (product.id === editId) {
+        saveCategory(category);
+        return { ...product, "date": date, "name": name, "category": category, "cost": cost, "isEdit": !product.isEdit }
+      } else {
+        return product;
       }
+    }
     ));
   }
 
@@ -66,9 +67,10 @@ function App() {
   }
 
   return <div className="container">
-    <h1 className="title">Калькулятор продуктов</h1>
+    <div className="title">Калькулятор продуктов</div>
     <Form addProduct={addProduct} />
     <Table products={products} editProductValues={editProductValues} deleteProduct={deleteProduct} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} category={category} setCategory={setCategory} />
+    <Chart products={products} />
   </div>
 }
 

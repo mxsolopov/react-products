@@ -7,6 +7,8 @@ import CategoriesSelect from "./CategoriesSelect";
 
 function Table({ products, editProductValues, deleteProduct, startDate, setStartDate, endDate, setEndDate, category, setCategory }) {
 
+    let headTitles = ['Дата', 'Название', 'Категория', 'Цена', 'Действия'];
+
     function getSum() {
         let sum = 0;
         for (let product of products) {
@@ -56,11 +58,9 @@ function Table({ products, editProductValues, deleteProduct, startDate, setStart
                 <table className="table">
                     <thead>
                         <tr>
-                            <td>Дата</td>
-                            <td>Название</td>
-                            <td>Категория</td>
-                            <td>Цена</td>
-                            <td>Действия</td>
+                            {headTitles.map((item, index) => {
+                                return <td key={index}>{item}</td>
+                            })}
                         </tr>
                     </thead>
 
@@ -88,7 +88,7 @@ function Table({ products, editProductValues, deleteProduct, startDate, setStart
                     <tfoot>
                         <tr>
                             <td colSpan={3}></td>
-                            <td>Сумма: {getSum()}</td></tr>
+                            <td style={{paddingLeft: 8}}><strong>{getSum()}</strong> - сумма</td></tr>
                     </tfoot>
                 </table>
             </div>
